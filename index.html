@@ -1,0 +1,680 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Household Demography model</title>
+
+		<meta name="description" content="Made with Reveal.JS, A framework for easily creating beautiful presentations using HTML, by Hakim El Hattab">
+		<meta name="author" content="Andreas Angourakis">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/solarized.css">
+		<link rel="stylesheet" href="css/myMods.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+
+	<body>
+
+		<div class="reveal">
+			<div id="background-header">
+				<div style="text-align:center; position:absolute; top:3%; left: 10%; font-size:33%; color:darkcyan">
+					<i>Angourakis et al.<br>IN-HOPPE workshop</i>
+				</div>
+				<div style="text-align:left; position:absolute; top:3%; right: 10%; font-size:33%; color:gray">
+					<b>Nice, 5-6 December 2019</b>
+				</div>
+				<div style="text-align:right; position:absolute; top:6%; right: 10%; font-size:33%; color:gray">
+					<b><a href="https://andros-spica.github.io/IN-HOPPE-Angourakis-et-al-2019/">https://andros-spica.github.io/IN-HOPPE-Angourakis-et-al-2019/</a></b>
+				</div>
+			</div>
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+            	<section data-state="title-page">
+					A general model for <h3>household-structured population dynamics</h3>
+					<h4 style="font-size: 50%">Presenting the first component for a model of<br>Indus Civilisation settlements in Haryana, NW India</h4>
+					<p>
+						<small>
+							<a href="https://www.arch.cam.ac.uk/directory/aa2112" target="_blank">Andreas <b>Angourakis</b></a>,
+							<!-- <a href="https://twitter.com/AndrosSpica" target="_blank"><i style="color:violet">@AndrosSpica</i></a>,  -->
+							<a href="https://www.sas.upenn.edu/anthropology/node/149588" target="_blank">Jennifer <b>Bates</b></a>,
+							<!-- <a href="https://twitter.com/DrJenniferBates" target="_blank"><i style="color:violet">@DrJenniferBates</i></a>,<br> -->
+							<a href="http://www.geog.cam.ac.uk/people/baudouin/" target="_blank">Jean-Phillipe <b>Baudouin</b></a>,<br>
+							<a href="http://www.esc.cam.ac.uk/directory/alena-giesche" target="_blank">Alena <b>Giesche</b></a>, 
+							<a href="https://www.arch.cam.ac.uk/directory/jrw95" target="_blank">Joanna <b>Walker</b></a>, 
+							<a href="https://www.arch.cam.ac.uk/directory/mcu22" target="_blank">M. Cemre <b>Ustunkaya</b></a>, 
+							<a href="https://cambridge.academia.edu/NathanWright" target="_blank">Nathan <b>Wright</b></a>,<br>
+							<a href="http://www.bhu.ac.in/aihc/rn.htm" target="_blank">Ravindra N. <b>Singh</b></a> and 
+							<a href="https://www.arch.cam.ac.uk/directory/cap59" target="_blank">Cameron A. <b>Petrie</b></a>
+						</small>
+					</p>
+					<div style="font-size: 50%">available at 
+						<a href="https://andros-spica.github.io/IN-HOPPE-Angourakis-et-al-2019/" target="_blank">https://andros-spica.github.io/IN-HOPPE-Angourakis-et-al-2019/</a><br>
+						<a href="https://andros-spica.github.io/IN-HOPPE-Angourakis-et-al-2019/index.html?print-pdf" target="_blank">https://andros-spica.github.io/IN-HOPPE-Angourakis-et-al-2019/index.html?print-pdf</a> (printable version)
+					</div>
+					<br>
+					<img src="images/logo-combo.png" alt="Logos"
+					style="width: 800px; border: none; box-shadow: none"/>
+					
+				</section>
+				
+				<section class="fragments" data-background="images/Bronze-Civs.PNG">
+					<br><br><br><br><br><br>
+					<h3 style="background-color: beige;"><b style="color:black">1.</b> 
+						<i style="color:crimson">The context: The Indus Civilisation</i></h3>
+				</section>
+				<section  data-background="images/Indus-cities.PNG">
+					<div id="right40" style="font-size: 80%; background-color: beige;">
+						<ul>
+							<li>One of the great ‘Old World’ Bronze Age civilisations</li>
+							<li>First cities in South Asia ('Mature Harappan', c.2500-1900 BC)</li>
+							<li>Five (or four) known major urban centres</li>
+							<li>... and a multitude of smaller settlements</li>
+						</ul>
+					</div>
+				</section>
+				<section id="fragments" data-background="https://upload.wikimedia.org/wikipedia/commons/2/2b/Mohenjo-daro.jpg">
+					<div style="border: none; box-shadow: none; background-color: white; opacity: 0.8">
+						<div class="fragment" id="left30">
+							<a href="https://www.nature.com/news/ancient-civilization-cracking-the-indus-script-1.18587" target="_blank">
+								<img src="https://www.nature.com/polopoly_fs/7.30435.1445255764!/image/42-19280428.jpg_gen/derivatives/landscape_630/42-19280428.jpg" alt="seal"
+								style="width: 250px; border: none; box-shadow: none"/>
+							</a>
+							<img src="images/seal-seated.jpg" alt="seal-seated"
+								style="width: 250px; border: none; box-shadow: none"/>
+						</div>
+						<div class="fragment" id="left40">
+							<a href="https://commons.wikimedia.org/wiki/File:The_Dancing_Girl,_in_a_photogravure_by_Alfred_Nawrath,1938.jpg" target="_blank">
+								<img src="https://upload.wikimedia.org/wikipedia/commons/7/7a/The_Dancing_Girl%2C_in_a_photogravure_by_Alfred_Nawrath%2C1938.jpg" alt="dancing girl"
+								style="width: 150px; border: none; box-shadow: none"/>
+							</a>
+							<a href="https://commons.wikimedia.org/wiki/File:Mohenjo-daro_Priesterk%C3%B6nig.jpeg" target="_blank">
+								<img src="https://upload.wikimedia.org/wikipedia/commons/d/df/Mohenjo-daro_Priesterk%C3%B6nig.jpeg" alt="priest king"
+								style="width: 150px; border: none; box-shadow: none"/>
+							</a>
+							<a href="https://www.harappa.com/slideshows/embodying-indus-life" target="_blank">
+								<img src="https://www.harappa.com/sites/default/files/slides/1_3.jpg" alt="figurines"
+								style="width: 150px; border: none; box-shadow: none"/>
+							</a>
+							<img src="images/pottery.jpg" alt="pottery"
+								style="width: 150px; border: none; box-shadow: none"/>
+							<img src="images/blades.jpg" alt="blades"
+								style="width: 150px; border: none; box-shadow: none"/>
+							<img src="images/chip-stones.jpg" alt="chip-stones"
+								style="width: 150px; border: none; box-shadow: none"/>
+						</div>
+						<div class="fragment" id="right30">
+							<a href="https://commons.wikimedia.org/wiki/File:The_%27Ten_Indus_Scripts%27_discovered_near_the_northern_gateway_of_the_Dholavira_citadel.jpg" target="_blank">
+								<img src="https://upload.wikimedia.org/wikipedia/commons/e/eb/The_%27Ten_Indus_Scripts%27_discovered_near_the_northern_gateway_of_the_Dholavira_citadel.jpg" alt="Dholavira signboard"
+								style="width: 190px; border: none; box-shadow: none"/>
+							</a>
+							<img src="images/bungles.jpg" alt="bungles"
+								style="width: 210px; border: none; box-shadow: none"/>
+							<img src="images/beads.jpg" alt="beads"
+								style="width: 210px; border: none; box-shadow: none"/>
+							<img src="images/body-decor.jpg" alt="body-decor"
+								style="width: 210px; border: none; box-shadow: none"/>
+						</div>
+					</div>
+					<i style="font-size:33%; background-color: white; opacity: 0.8">
+					Mohenjo-daro, Sindh, Pakistan. "Great bath" and "granary".  
+					<a href="https://commons.wikimedia.org/wiki/File:Mohenjo-daro.jpg">(Source)</a>
+					</i>
+				</section>
+
+				<section class="fragments">
+					The Indus Civilisation is still engolfed in mystery, unknown in many aspects.<br><br>
+					<p class="fragment" style="text-align: right;">Although some seem to have it clear...</p>
+				</section>
+
+				<section>
+					<div id="left50" style="text-align: right;">
+						<a href="https://www.google.com/url?sa=i&source=imgres&cd=&cad=rja&uact=8&ved=2ahUKEwjL8aC2s5zmAhUGy4UKHUZTAJwQjRx6BAgBEAQ&url=https%3A%2F%2Fscroll.in%2Farticle%2F813840%2Ffilm-review-mohenjo-daro-is-a-costume-party-with-food-for-thought&psig=AOvVaw3kgNErRP2Wyr0sA_6R9ss7&ust=1575562927200833" target="_blank">
+							<img src="https://d1u4oo4rb13yy8.cloudfront.net/hgagqatmwg-1470993959.jpg" alt="Mohenjo-daro movie - trio"
+							style="width: 350px; border: none; box-shadow: none"/>
+						</a>
+						<a href="https://www.trigon-film.org/fr/movies/Mohenjo_Daro" target="_blank">
+							<img src="https://www.trigon-film.org/fr/movies/Mohenjo_Daro/photos/large/Mohenjo_03.jpg" alt="Mohenjo-daro movie - bath"
+							style="width: 350px; border: none; box-shadow: none"/>
+						</a>
+					</div>
+					<div id="right50" style="text-align: left;">
+						<a href="https://en.wikipedia.org/wiki/Mohenjo_Daro_(film)" target="_blank">
+							<img src="https://upload.wikimedia.org/wikipedia/en/e/e4/Mohenjo_Daro_Poster.jpg" alt="Mohenjo-daro movie - title"
+							style="width: 360px; border: none; box-shadow: none"/>
+						</a>
+					</div>
+				</section>
+
+				<section class="fragments">
+					Some things we <b>DO</b> know:
+				</section>
+
+				<section>
+					<h3>Long distance exchange</h3>
+					<img src="images/3mill-trade.png" alt="long-trade"
+						style="width: 580px; border: none; box-shadow: none"/>
+					<img src="images/Harappa-raw-mat.jpg" alt="harappa-supply"
+						style="width: 330px; border: none; box-shadow: none"/>
+						<br>
+					<i style="font-size: 33%">T. Wilkinson 2012, R. Law 2010</i>
+				</section>
+
+				<section>
+					<div id="left40">
+						<a title="Petrie et al. 2017, Current Anthropology, 58(1):1-30, Fig. 1" 
+							href="https://doi.org/10.1086/690112" target="_blank">
+							<i style="font-size: 33%">Petrie et al. 2017, Current Anthropology</i>
+							<img width="512" alt="Petrie et al. 2017, Fig. 1" 
+							src="https://www.journals.uchicago.edu/na101/home/literatum/publisher/uchicago/journals/content/ca/2017/ca.2017.58.issue-1/690112/20181109/images/medium/fg1_online.gif">
+						</a>
+					</div>
+					<div id="right60">
+						<br>
+						<h3>Urbanisation and<br><i style="color: crimson">de-</i>urbanisation</h3>
+						<a title="Green & Petrie 2018, Journal of Field Archaeology, 43:4, 284-299, Fig. 9" 
+							href="https://doi.org/10.1080/00934690.2018.1464332" target="_blank">
+							<i style="font-size: 33%">Green & Petrie 2018, Journal of Field Archaeology</i>
+							<img width="512" alt="Petrie et al. 2017, Fig. 1" 
+							src="https://www.tandfonline.com/na101/home/literatum/publisher/tandf/journals/content/yjfa20/2018/yjfa20.v043.i04/00934690.2018.1464332/20180523/images/medium/yjfa_a_1464332_f0009_b.gif">
+						</a>
+					</div>
+				</section>
+
+				<section>
+					<h3>summer rain, winter rain</h3>
+					<div id="left50">
+						<a title="Giesche et al. 2019, Clim. Past, 15:73-90, Fig. 1" 
+							href="https://doi.org/10.5194/cp-15-73-2019" target="_blank">
+							<i style="font-size: 33%">Giesche et al. 2019, Clim. Past</i>
+							<img width="400px" alt="Giesche et al. 2019, Fig. 1" 
+							src="https://www.clim-past.net/15/73/2019/cp-15-73-2019-f01-thumb.png">
+						</a>
+						
+					</div>
+					<div id="right50">
+						<i style="font-size: 33%">J.-P. Baudouin (in preparation)</i><br>
+						<img src="images/winter.png" alt="winter-rain"
+							style="width: 350px; border: none; box-shadow: none"/><br>
+						<i style="font-size: 66%">“Predictable unpredictability”</i><br>
+						<img src="images/summer.png" alt="summer-rain"
+							style="width: 350px; border: none; box-shadow: none"/>
+					</div>
+				</section>
+
+				<section class="fragments">
+					<h3>Precipitation and water stress</h3>
+					A point of comparison...
+					<div id="left50" style="text-align: center;">
+						<a title="Wallach et al. 2006, p. 120, Fig. 3.4" 
+							href="https://books.google.es/books?id=llVwDwAAQBAJ&lpg=PP1&hl=es&pg=PA120#v=onepage&q&f=false" target="_blank">
+							<i style="font-size: 33%">Wallach et al. 2006, p. 120, Fig. 3.4</i>
+							<img width="300px" alt="Giesche et al. 2019, Fig. 1" 
+							src="images/SoilWaterBalanceModel_sFrance_site1_2007.png">
+						</a><br>
+						<b style="font-size: 66%">South France (2007)</b>
+					</div>
+					<div id="right50" style="text-align: center;">
+						<img width="300px" alt="Giesche et al. 2019, Fig. 1" 
+							src="images/SoilWaterBalanceModel_Hissar_1995.png">
+						<br>
+						<b style="font-size: 66%">Hissar, Haryana, NW India (1995)</b>
+					</div>
+					<br>
+					<i style="font-size: 33%">Input data obtained at: <a href="" target="_blank">NASA POWER</a></i>
+				</section>
+
+				<section>
+					<h3>Climate change</h3>
+					<div id="left40">
+						<a title="Giesche et al. 2019, Clim. Past, 15:73-90, Fig. 6" 
+							href="https://doi.org/10.5194/cp-15-73-2019" target="_blank">
+							<i style="font-size: 33%">Giesche et al. 2019, Clim. Past</i>
+							<img width="330" alt="Giesche et al. 2019, Fig. 6" 
+							src="https://www.clim-past.net/15/73/2019/cp-15-73-2019-f06-thumb.png">
+						</a>
+					</div>
+					<div id="right60">
+						<br><br>
+						<ul>
+							<li><b>Urban phase</b><br>(MH, 4.5 and 4.3 ka)<br>&#8594; stronger winter precipitation</li>
+							<br>
+							<li><b>End of urban phase</b><br>(MH-LH, 4.1 ka)<br>&#8594; decrease in both the summer and winter precipitation</li>
+						</ul>
+					</div>
+				</section>
+				<section>
+					<div id="left50">
+						<a title="Petrie & Bates 2017, J. J World Prehist, 30:81, Fig. 3" 
+							href="https://doi.org/10.1007/s10963-017-9101-z" target="_blank">
+							<i style="font-size: 33%">Petrie & Bates 2017, J. J World Prehist</i>
+							<img width="400" alt="Petrie & Bates 2017, Fig. 3" 
+							src="https://media.springernature.com/lw785/springer-static/image/art%3A10.1007%2Fs10963-017-9101-z/MediaObjects/10963_2017_9101_Fig3_HTML.gif">
+						</a>
+					</div>
+					<div id="right50">
+						<br>
+						<h3>Food production</h3>
+						<ul style="font-size: 66%">
+							<li>Main crops:
+								<ul>
+									<li>barley/wheat (winter)</li>
+									<li>millet/rice (summer)</li>
+								</ul>
+							</li>
+							<li>Pulses</li>
+							<li>Other</li>
+						</ul>
+						<br>
+						<a title="Bates, Petrie & Singh 2018,  Archaeol Anthropol Sci, 10:1703, Fig. 8" 
+							href="https://doi.org/10.1007/s12520-017-0489-2" target="_blank">
+							<i style="font-size: 33%">Bates, Petrie & Singh 2018,  Archaeol Anthropol Sci</i>
+							<img width="400" alt="Bates, Petrie & Singh 2018, Fig. 8" 
+							src="https://media.springernature.com/lw785/springer-static/image/art%3A10.1007%2Fs12520-017-0489-2/MediaObjects/12520_2017_489_Fig8_HTML.gif">
+						</a>
+					</div>
+				</section>
+				<section>
+					<h3>Food production</h3>
+					<div id="left50">
+						<a title="Bassem 18 at the English language Wikipedia [CC BY-SA 3.0 (http://creativecommons.org/licenses/by-sa/3.0/)], via Wikimedia Commons" 
+							href="https://commons.wikimedia.org/wiki/File:Water_buffalo.jpg" target="_blank">
+							<img width="215" alt="Water buffalo" src="https://upload.wikimedia.org/wikipedia/commons/1/1d/Water_buffalo.jpg">
+						</a>
+						<a title="Pavanaja [CC BY-SA 3.0 (https://creativecommons.org/licenses/by-sa/3.0)], via Wikimedia Commons" 
+						href="https://commons.wikimedia.org/wiki/File:Hariana_02.JPG" target="_blank">
+						<img width="215" alt="Hariana 02" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Hariana_02.JPG/512px-Hariana_02.JPG">
+						</a>
+						<a title="goat india by Vandita Kapoor" 
+						href="https://www.thebetterindia.com/42013/voicemail-goat-farmers-tamil-nadu-company/goat-india/" target="_blank">
+						<img width="215" alt="goat-india" src="https://www.thebetterindia.com/wp-content/uploads/2016/01/goat-india.jpg">
+						</a>
+						<a title="Emőke Dénes [CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0)], via Wikimedia Commons" 
+						href="https://commons.wikimedia.org/wiki/File:Sheep_India_3.jpg" target="_blank">
+						<img width="215" alt="Sheep India 3" src="https://upload.wikimedia.org/wikipedia/commons/7/75/Sheep_India_3.jpg">
+						</a>
+					</div>
+					<div id="right50">
+						<ul>
+							<li><b>Animal husbandry:</b><br>zebu, water buffalo, sheep, goat, pigs (?)</li>
+							<br>
+							<li>Fishing, hunting</li>
+							<br>
+							<li>Role of herding?</li>
+						</ul>
+					</div>
+				</section>
+				
+				<section data-background="https://gamepedia.cursecdn.com/minecraft_gamepedia/6/63/The_13w22a_Banner.png?version=c9547c31873e81c2fcff3b56461a4da5">
+					<br><br><br><br><br>
+					<h3 style="background-color: beige;"><b style="color:black">2.</b> 
+						<i style="color:crimson">The Indus Village model</i></h3>
+				</section>
+				<section>
+					<h3>End-goal</h3>
+					to explore human <i style="color: crimson">adaptation to the diverse landscapes</i> of NW India 
+					and expose the <i style="color: crimson">sustainability</i> of different types of <i style="color: crimson">food production regimes</i>, 
+					mainly in terms of <i style="color: crimson">cropping strategies</i>, in front of <i style="color: crimson">abrupt climate change</i>
+				</section>
+				<section>
+					<h3>Rationale</h3>
+					<ul>
+						<li>rural settlement(s)</li>
+						<li>local scale (max. 25 km&sup2;)</li>
+						<li>food production/consumption</li>
+						<li>Explore parameters (sensitivity analysis)</li>
+						<li>Explore scenarios<br>(procedural generation, alternative designs)</li>
+						<li>Questions:
+							<ul>
+								<li>Does <i style="color: green">diversity</i> favours <i style="color: crimson">adaptation</i>?</li>
+								<li>Is it detrimental to generating <i style="color: green">surplus</i> and therefore maintaining <i style="color: crimson">urban</i> populations?</li>
+							</ul>
+						</li>
+					</ul>
+				</section>
+				<section>
+					<img src="images/Household-model-infograph-v3.png" alt="Goal model"
+						style="border: none; box-shadow: none"/>
+				</section>
+
+				<section>
+					<h3>Entities</h3>
+					<div id="right70">
+						<ul>
+							<li><b>Household</b>: <i style="color:crimson">propinquity</i> 
+								and <i style="color:crimson">co-residence</i>, rather 
+								than <i style="color:crimson">kinship</i></li>
+							<li><b>Group</b>: set of households, united by <i style="color:crimson">kinship</i> or 
+								<i style="color:crimson">alliance</i>; one or more may form a '<i style="color:crimson">settlement</i>'</li>
+							<li><b>Patches</b>: 1 hectare, vary in <i style="color:crimson">soil</i>, 
+								<i style="color:crimson">water balance</i>, and <i style="color:crimson">land use</i></li>
+						</ul>
+					</div>
+					<div id="left30">
+						<img src="images/units-infograph.png" alt="units infograph"
+						style="border: none; box-shadow: none"/>
+					</div>
+				</section>
+				
+				<section>
+					<h3>Model design, insofar</h3>
+					<img src="images/IndusVillage-simplified.png" alt="Indus Village design"
+					style="width: 600px; border: none; box-shadow: none"/>
+				</section>
+
+				<section>
+					<h3>Household <i style="color: crimson">Demography</i></h3>
+				</section>
+
+				<section>
+					<h3>Household <i style="color: crimson">Structure</i></h3>
+					<img src="images/household1-detail.png" alt="Household structure"
+					style="width: 600px; border: none; box-shadow: none"/>
+				</section>
+
+				<section class="fragments">
+					<h3>Are <i style="color: green">household</i> agents better than <i style="color: blue">individual</i> agents?</h3>
+					<p class="fragment">Useful while processes at <i style="color: blue">individual level</i> are fewer than those at <i style="color: green">household level</i>.</p>
+					<p class="fragment">Household-based models are <i style="color: green">simpler</i>...</p>
+					<p class="fragment">... only if some information on individuals is <i style="color: blue">lost</i>.</p>
+					<p class="fragment">e.g. Who are <i style="color: darkorange">orange</i>'s parents?</p>
+				</section>
+
+				<section>
+					<h3>Submodels</h3>
+					<ul>
+						<li>Age/sex-specific submodels: <i style="color: crimson">mortality</i> (Coale-Demeny, from <a href="https://cran.r-project.org/package=demogR">demogR</a> package), 
+							<i style="color: crimson">nuptiality</i> and <i style="color: crimson">fertility</i> (<a href="https://www.jstor.org/stable/26347932">Peristeva & Kostaki 2007</a>, <a href="http://dx.doi.org/10.25336/P6TK56">2015</a>)</li>
+						<li>Time step: <i style="color: crimson">year</i></li>
+					</ul>
+					<img src="images/mortalityModel-levels.png" alt="mortality model"
+					style="width: 300px; border: none; box-shadow: none"/>
+					<img src="images/nuptialityModel-equation.png" alt="nuptiality model"
+					style="width: 300px; border: none; box-shadow: none"/>
+					<img src="images/fertilityModel-equation.png" alt="fertility model"
+					style="width: 300px; border: none; box-shadow: none"/>
+					<br>
+					<i style="font-size: 50%;">Number of parameters: 2 + 8 + 4 = 14 (but with symmetry)</i>
+				</section>
+
+				<section>
+					<h3>Marriage</h3>
+					<ul>
+						<li><i style="color: crimson">residence rule</i>: matrilocal-matrilineal/patrilocal-patrilineal</li>
+						<li><i style="color: crimson">kinship tabu</i>: lineages are tracked according to residence rule and tested for kinship degree when forming new couples.</li>
+						<li><i style="color: crimson">max. couples</i>: households accept a specific, fixed number of couples; beyond this number, it will force new couples to form new households.</li>
+						<li><i style="color: crimson">open system</i>: population exchanges individuals with hypothetical <i style="color: crimson">exterior households</i> when there is no local candidates</li>
+					</ul>
+				</section>
+
+				<section>
+					<h3>Orphans</h3>
+					<ul>
+						<li><i style="color: crimson">maturity age</i>: the minimum age acceptable for individuals to keep a household without older individuals (defaults to 15).</li>
+						<li>Children are only considered <i style="color: crimson">orphans</i> when the last adult of their households dies (not strictly their parents).</li>
+						<li>Orphans are relocated randomly (for now?) among existing households while their former households are dissolved (<i style="color: crimson">adopted</i>)</li>
+					</ul>
+				</section>
+
+				<section>
+					<a href="https://github.com/Andros-Spica/abm-templates/blob/master/diagrams/04-householdDemographyModel.png" target="_blank">
+						<img src="https://github.com/Andros-Spica/abm-templates/blob/master/diagrams/04-householdDemographyModel.png?raw=true" alt="Household Demography diagram"
+						style="width: 600px"/>
+					</a>
+				</section>
+
+				<section>
+					<h3>Dynamics</h3>
+					<section>
+						<ul>
+							<li>Potential for a variety of behaviours:
+								<ul>
+									<li>(local) extinction</li>
+									<li>chaotic oscillation</li>
+									<li>wave growth</li>
+									<li>exponential growth</li>
+								</ul></li>
+								<br>
+							<li>Sensitivity to population size (extinction bottlenecks visible with lineages)</li>
+							<br>
+							<li>(Ongoing) full sensitivity analysis</li>
+						</ul>
+					</section>
+					
+					<section>
+						<i style="font-size: 66%">exponential growth</i><br>
+						<img src="images/04-householdDemography interface.png" alt="household demography interface"
+						style="width: 800px; border: none; box-shadow: none"/>
+					</section>
+
+					<section>
+						<i style="font-size: 66%">extinction</i><br>
+						<img src="images/extinction.png" alt="extinction example"
+						style="width: 800px; border: none; box-shadow: none"/>
+					</section>
+
+					<section>
+						<i style="font-size: 66%">extinction bottleneck</i><br>
+						<img src="images/extinction bottleneck.png" alt="extinction bottleneck example"
+						style="width: 800px; border: none; box-shadow: none"/>
+					</section>
+
+					<section>
+						<i style="font-size: 66%">waves growth</i><br>
+						<img src="images/waves growth.png" alt="waves growth example"
+						style="width: 800px; border: none; box-shadow: none"/>
+					</section>
+
+				</section>
+
+				
+				<section>
+					<div id="left50"><img src="images/IndusVillage-simplified.png" alt="Indus Village design"
+						style="width: 400px; border: none; box-shadow: none"/></div>
+					<div id="right50">
+						<h3>A glimpse at the rest of the <i style="color: crimson">Indus Village model</i></h3>
+					</div>
+				</section>
+
+				<section>
+					<h4><i style="color: blue">Weather</i> model</h4><br>
+					<a href="https://github.com/Andros-Spica/abm-templates" target="_blank">
+					<img src="images/05-weather interface.png" alt="weather interface"
+					style="width: 800px; border: none; box-shadow: none"/></a>
+				</section>
+
+				<section>
+					<h4><i style="color: blue">Crop</i> model (+ Weather, Soil Water Balance)</h4><br>
+					<a href="https://github.com/Andros-Spica/SIMPLE-crop-model" target="_blank">
+					<img src="images/SIMPLE-crop-model interface.png" alt="SIMPLE crop model interface"
+					style="width: 800px; border: none; box-shadow: none"/></a>
+					<br><i style="font-size: 33%">Based on SIMPLE crop model (<a href="https://doi.org/10.1016/j.eja.2019.01.009" target="_blank">Zhao et al. 2019</a>)</i>
+				</section>
+
+				<section>
+					<h4><i style="color: blue">Land model</i> (procedural terrain generator)</h4><br>
+					<a href="https://github.com/Andros-Spica/ProceduralMap-NetLogo" target="_blank">
+					<img src="https://github.com/Andros-Spica/ProceduralMap-NetLogo/blob/master/screenshots/terrainGenerator_v2_withFlows_interface.png?raw=true" alt="terrain generator interface"
+					style="width: 800px; border: none; box-shadow: none"/></a>
+				</section>
+
+				<section>
+					<h3>Household <i style="color: crimson">economy</i></h3>
+					<h4>From land use to diet</h4>
+					<div id="left50">
+						<img src="images/land-to-diet.png" alt="multi-level conection between land use and diet"
+							style="width: 400px; border: none; box-shadow: none"/>
+					</div>
+					<div id="right50">
+						<ul>
+							<li><i style="color: crimson">Food production</i> at household-level</li>
+							<li>Specific <i style="color: crimson">strategies</i> applied to patches with specific (changing) <i style="color: crimson">conditions</i></li>
+							<li><i style="color: crimson">Diet</i> and <i style="color: crimson">nutrition</i></li>
+							<li>Sharing/exchange to be realised at group-level</li>
+						</ul>
+					</div>
+				</section>
+				
+				<section>
+					<h3>Household <i style="color: crimson">economy</i></h3>
+					<h4>Main cycle</h4>
+					<img src="images/household-economy-units-yEd_v2_transp.png" alt="economic cycle"
+					style="width: 800px; border: none; box-shadow: none"/>
+					<!--standing population &#8594; labour &#8594; food production &#8594; consumption (+storage) &#8594; nutrition &#8594; mortality-->
+				</section>
+
+				<section>
+					<h3>Data input</h3>
+					<section>
+						<h4>Soils and crop conditions</h4>
+						<div id="left50">
+							<a title="FAO soils portal" 
+								href="http://www.fao.org/soils-portal/soil-survey/soil-maps-and-databases/harmonized-world-soil-database-v12/en/" target="_blank">
+								<img width="512" alt="FAO-soil-portal" 
+								src="images/data-soil.png">
+							</a>
+							<br>
+							Challenge: model animal husbandry
+						</div>
+						<div id="right50">
+							<a title="ECOCROP portal" 
+								href="http://ecocrop.fao.org/ecocrop/srv/en/dataSheet?id=1232" target="_blank">
+								<img width="512" alt="ECOCROP" 
+								src="images/data-crops.png">
+							</a>
+						</div>
+					</section>
+					<section>
+						<h4>Foodstuff nutrition values</h4>
+						<div id="left50">
+								<a title="USDA food database" 
+							href="https://ndb.nal.usda.gov/ndb/foods/show/20005?fgcd=&manu=&format=&count=&max=25&offset=&sort=default&order=asc&qlookup=Barley%2C+pearled%2C+raw&ds=SR&qt=&qp=&qa=&qn=&q=&ing=" target="_blank">
+							<img width="512" alt="USDA-foods" 
+							src="images/data-foodstuff.png">
+						</a>
+							</div>
+							<div id="right50">
+									Challenge: raw or cooked?
+									<br>
+									<a title="Bates, Petrie & Singh 2018,  Archaeol Anthropol Sci, 10:1703, Fig. 8" 
+									href="https://doi.org/10.1007/s12520-017-0489-2" target="_blank">
+									<img width="400" alt="Bates, Petrie & Singh 2018, Fig. 8" 
+									src="images/data-foodstuff-ref.png">
+								</a>
+							</div>
+					</section>
+				</section>
+
+				<section>
+					<h3>Conclusions</h3>
+					<ul>
+						<li>Balance between <i style="color: green">simplistic</i> and <i style="color: crimson">complicated</i> designs (KISS?)</li>
+						<br>
+						<li>There are many models <i style="color: crimson">"out there" (replicability)</i></li>
+						<br>
+						<li>Importance of the cycle <i style="color: crimson">design</i>-<i style="color: green">document</i>-<i style="color: blue">refactor</i></li>
+					</ul>
+				</section>
+
+				<section>
+					<h3>'TwoRains' project</h3>
+					<h4>ERC, 2015-2020</h4>
+					<br><br>
+					Follow our updates!
+					<br><br>
+					<ul>
+						<li><a href="https://www.arch.cam.ac.uk/research/projects/two-rains" target="_blank">Institutional Web page</a></li>
+						<li><a href="https://tworains.wordpress.com" target="_blank">Project blog</a></li>
+						<li><a href="https://github.com/Andros-Spica/abm-templates" target="_blank">ABM models and templates</a></li>
+					</ul>
+				</section>
+
+				<section>
+					<h3>Acknowledgements</h3>
+					<p style="font-size: 66%">
+						Thanks to the <b style="color: blue">Land, Water and Settlement</b> and <b style="color: crimson">TwoRains</b> teams:<br><br>
+						Aftab Alam, Alessandro Ceccarelli, Sagorika Chakraborty, 
+						Sudarshan Chakradhari, Arti Chowdhary, Yama Dixit, Charly French, Adam Green, 
+						Henry Green, Lily Green, David Hodell, Penny Jones, Carla Lancelotti, Emma Lightfoot, Frank Lynam, 
+						Sayantani Neogi, Hector Orengo, Arun Kumar Pandey, Danika Parikh, Vikas Pawar, Amit Ranjan,
+						David Redhouse, Dheerendra Pratab Singh, & Akshyeta Suryanarayan.
+						<br><br>
+						Special thanks also to the Department of AIHC and Archaeology, BHU, the European Research Council (ERC), 
+						and the UK-India Education and Research Initiative (UKIERI) for support and funding, and to the Archaeological 
+						Survey of India for permission to carry out the work.
+					</p>
+
+				</section>
+
+				<section data-state="title-page">
+					A general model for <h3 style="font-size: 90%">household-structured population dynamics</h3>
+					<h4 style="font-size: 50%">Presenting the first component for a model of<br>Indus Civilisation settlements in Haryana, NW India</h4>
+					<p>
+						<small>
+							<a href="https://www.arch.cam.ac.uk/directory/aa2112" target="_blank">Andreas <b>Angourakis</b></a>,
+							<!-- <a href="https://twitter.com/AndrosSpica" target="_blank"><i style="color:violet">@AndrosSpica</i></a>,  -->
+							<a href="https://www.sas.upenn.edu/anthropology/node/149588" target="_blank">Jennifer <b>Bates</b></a>,
+							<!-- <a href="https://twitter.com/DrJenniferBates" target="_blank"><i style="color:violet">@DrJenniferBates</i></a>,<br> -->
+							<a href="http://www.geog.cam.ac.uk/people/baudouin/" target="_blank">Jean-Phillipe <b>Baudouin</b></a>,<br>
+							<a href="http://www.esc.cam.ac.uk/directory/alena-giesche" target="_blank">Alena <b>Giesche</b></a>, 
+							<a href="https://www.arch.cam.ac.uk/directory/jrw95" target="_blank">Joanna <b>Walker</b></a>, 
+							<a href="https://www.arch.cam.ac.uk/directory/mcu22" target="_blank">M. Cemre <b>Ustunkaya</b></a>, 
+							<a href="https://cambridge.academia.edu/NathanWright" target="_blank">Nathan <b>Wright</b></a>,<br>
+							<a href="http://www.bhu.ac.in/aihc/rn.htm" target="_blank">Ravindra N. <b>Singh</b></a> and 
+							<a href="https://www.arch.cam.ac.uk/directory/cap59" target="_blank">Cameron A. <b>Petrie</b></a>
+						</small>
+					</p>
+					<div style="font-size: 50%">available at 
+						<a href="https://andros-spica.github.io/IN-HOPPE-Angourakis-et-al-2019/" target="_blank">https://andros-spica.github.io/IN-HOPPE-Angourakis-et-al-2019/</a><br>
+						<a href="https://andros-spica.github.io/IN-HOPPE-Angourakis-et-al-2019/index.html?print-pdf" target="_blank">https://andros-spica.github.io/IN-HOPPE-Angourakis-et-al-2019/index.html?print-pdf</a> (printable version)
+					</div>
+					<br>
+					<img src="images/logo-combo.png" alt="Logos"
+					style="width: 800px; border: none; box-shadow: none"/>
+					
+				</section>
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/search/search.js', async: true },
+					{ src: 'plugin/zoom-js/zoom.js', async: true }
+				]
+			});
+		</script>
+
+	</body>
+</html>

@@ -1,5 +1,5 @@
 # A general model for household-structured population dynamics: presenting the first component for a model of Indus Civilisation settlements in Haryana, NW India
-Presentation for the International Network -Historical and osteoarchaeological Past Populations Exploration (IN-HOPPE) workshop in Nice (5-6 December 2019)
+Presentation for the International Network - Historical and osteoarchaeological Past Populations Exploration (IN-HOPPE) workshop in Nice (5-6 December 2019)
 
 IN-HOPPE Network home page: https://in-hoppe.site.ined.fr/fr/
 Workshop programme & book of abstracts: 
